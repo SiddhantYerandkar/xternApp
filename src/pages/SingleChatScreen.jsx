@@ -9,7 +9,7 @@ const SingleChatScreen = () => {
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const handleBackClick = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
@@ -104,13 +104,13 @@ const SingleChatScreen = () => {
     return `${formattedHours}:${formattedMinutes} ${ampm}`;
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

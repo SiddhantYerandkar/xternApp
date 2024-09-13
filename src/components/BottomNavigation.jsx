@@ -8,11 +8,11 @@ const BottomNavigation = () => {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <div id="bottom-navigation">
+        <div id="bottom-navigation" style={{ paddingBottom: '20px' }}>
             <div className="container">
                 <div className="home-navigation-menu">
                     <div className="bottom-panel navigation-menu-wrap">
-                        <ul className="bootom-tabbar">
+                        <ul className="bootom-tabbar d-flex justify-content-around">
                             <li className={isActive("/course-ongoing-screen") ? "active" : ""}>
                                 <Link to="/course-ongoing-screen" className={isActive("/course-ongoing-screen") ? "active" : ""}>
                                     <svg
@@ -73,7 +73,7 @@ const BottomNavigation = () => {
                                         </g>
                                     </svg>
                                 </Link>
-                                <span className={`d-block ${isActive("/course-ongoing-screen") ? "fw-bold fs-6" : "fs-7"}`}>Courses</span>
+                                <span className="d-block small">Assess</span>
                             </li>
                             <li className={isActive("/bookmark") ? "active" : ""}>
                                 <Link to="/bookmark" className={isActive("/bookmark") ? "active" : ""}>
@@ -114,7 +114,7 @@ const BottomNavigation = () => {
                                         </g>
                                     </svg>
                                 </Link>
-                                <div className={isActive("/bookmark") ? "orange-boder active" : "orange-boder"}></div>
+                                <span className="d-block small">Apply</span>
                             </li>
                             <li className={isActive("/homescreen") ? "active" : ""}>
                                 <Link to="/homescreen" className={isActive("/homescreen") ? "active" : ""}>
@@ -148,7 +148,7 @@ const BottomNavigation = () => {
                                         </g>
                                     </svg>
                                 </Link>
-                                <div className={isActive("/homescreen") ? "orange-boder active" : "orange-boder"} ></div>
+                                <span className="d-block small">Discover</span>
                             </li>
                             <li className={isActive("/chat-screen") ? "active" : ""}>
                                 <Link to="/chat-screen" className={isActive("/chat-screen") ? "active" : ""}>
@@ -203,7 +203,7 @@ const BottomNavigation = () => {
                                         </g>
                                     </svg>
                                 </Link>
-                                <div className={isActive("/chat-screen") ? "orange-boder active" : "orange-boder"}></div>
+                                <span className="d-block small">Chat</span>
                             </li>
                             <li className={isActive("/profile") ? "active" : ""}>
                                 <Link to="/profile" className={isActive("/profile") ? "active" : ""}>
@@ -237,7 +237,7 @@ const BottomNavigation = () => {
                                         </g>
                                     </svg>
                                 </Link>
-                                <div className={isActive("/profile") ? "orange-boder active" : "orange-boder"} ></div>
+                                <span className="d-block small">profile</span>
                             </li>
                         </ul>
                     </div>

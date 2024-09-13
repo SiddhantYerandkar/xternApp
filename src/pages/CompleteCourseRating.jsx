@@ -8,7 +8,7 @@ import Loading from "../components/Loading";
 const CompleteCourseRating = () => {
   const [rating, setRating] = useState(1); // Initial rating state, set to 1 star
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const handleBackClick = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
@@ -19,13 +19,13 @@ const CompleteCourseRating = () => {
     setRating(value);
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

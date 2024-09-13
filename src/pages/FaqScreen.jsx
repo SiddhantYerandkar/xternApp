@@ -18,7 +18,7 @@ const AccordionItem = ({ title, content, isOpen, onClick }) => {
 const FaqScreen = () => {
   const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(null);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const handleClick = (index) => {
     setOpenIndex(index === openIndex ? null : index);
@@ -30,13 +30,13 @@ const FaqScreen = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   const accordionData = [
     {
       sectionTitle: "Refund Status: Common Questions",

@@ -6,7 +6,7 @@ const FilterScreen = () => {
   const [isFixed, setIsFixed] = useState(false);
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(true);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const handleChange = (event) => {
     setIsChecked(event.target.checked);
@@ -33,13 +33,13 @@ const FilterScreen = () => {
     };
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

@@ -30,7 +30,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Link } from "react-router-dom";
-import Loading from "../components/Loading";
+//import Loading from "../components/Loading";
 import DarkLightmode from "../components/DarkLightMode";
 
 const HomeScreen = () => {
@@ -39,7 +39,7 @@ const HomeScreen = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isBookmarkedIcon, setIsBookmarkedIcon] = useState(false);
   const [isBookmarkIcon, setIsBookmarkIcon] = useState(false);
-  const [loading, setLoading] = useState(true);
+ // const [loading, setLoading] = useState(true);
 
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
@@ -123,13 +123,13 @@ const HomeScreen = () => {
     };
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}
@@ -2601,7 +2601,7 @@ const HomeScreen = () => {
       <div className="dark-overlay"></div>
       {/* <!--SideBar setting menu end--> */}
       {/* <!-- pwa install app popup Start --> */}
-      {isOpen && (
+      {/* {isOpen && (
         <div
           className="offcanvas offcanvas-bottom addtohome-popup theme-offcanvas"
           tabIndex="-1"
@@ -2633,7 +2633,7 @@ const HomeScreen = () => {
             </a>
           </div>
         </div>
-      )}
+      )} */}
       {/* <!-- pwa install app popup End --> */}
     </>
   );

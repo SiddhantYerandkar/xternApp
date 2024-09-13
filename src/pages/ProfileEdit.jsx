@@ -10,7 +10,7 @@ const ProfileEdit = () => {
   const [name, setName] = useState("Jessica Smith");
   const [email, setEmail] = useState("jessicasmith@mail.com"); // Initialize email state
   const [mobile, setMobile] = useState("235 654 8899");
-  const [loading, setLoading] = useState(true);
+ // const [loading, setLoading] = useState(true);
 
   const handleChange = (event) => {
     setEmail(event.target.value); // Update email state when input changes
@@ -28,13 +28,13 @@ const ProfileEdit = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

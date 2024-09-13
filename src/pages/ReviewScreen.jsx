@@ -18,7 +18,7 @@ import Loading from "../components/Loading";
 const ReviewScreen = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const handleBackClick = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
@@ -28,13 +28,13 @@ const ReviewScreen = () => {
     setIsBookmarked(!isBookmarked);
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

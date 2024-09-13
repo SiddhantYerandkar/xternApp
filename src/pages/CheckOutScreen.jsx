@@ -12,7 +12,7 @@ const CheckOutScreen = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const handleBackClick = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
@@ -38,13 +38,13 @@ const CheckOutScreen = () => {
     arrows: false,
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

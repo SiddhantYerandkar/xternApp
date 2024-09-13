@@ -13,7 +13,7 @@ import DarkLightmode from "../components/DarkLightMode";
 
 const Bookmark = () => {
   const [bookmarks, setBookmarks] = useState([true, true, true, true]);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const toggleBookmark = (index) => {
     setBookmarks(
@@ -21,13 +21,13 @@ const Bookmark = () => {
     );
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   const courses = [
     {
       imgSrc: BookmarkImg1,
