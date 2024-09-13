@@ -7,7 +7,7 @@ import Loading from "../components/Loading";
 const ResetPasswordScreen = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -21,21 +21,21 @@ const ResetPasswordScreen = () => {
     setShowPassword(!showPassword);
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Preloader start --> */}
-      {loading && (
+      {/* {loading && (
         <div className="loader-mask">
           <div className="loader"></div>
         </div>
-      )}
+      )} */}
       {/* <!-- Preloader end --> */}
       {/* <!-- Header start --> */}
       <header id="top-header">

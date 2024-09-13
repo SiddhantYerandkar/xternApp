@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 const Language = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("language1");
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const handleBackClick = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
@@ -15,13 +15,13 @@ const Language = () => {
     setSelectedLanguage(event.target.id);
   };
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}
@@ -74,9 +74,8 @@ const Language = () => {
             <h1 className="d-none">Change Language</h1>
             <div className="lang-list">
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language1" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language1" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"
@@ -94,9 +93,8 @@ const Language = () => {
                 </label>
               </div>
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language2" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language2" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"
@@ -114,9 +112,8 @@ const Language = () => {
                 </label>
               </div>
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language3" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language3" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"
@@ -134,9 +131,8 @@ const Language = () => {
                 </label>
               </div>
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language4" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language4" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"
@@ -154,9 +150,8 @@ const Language = () => {
                 </label>
               </div>
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language5" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language5" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"
@@ -174,9 +169,8 @@ const Language = () => {
                 </label>
               </div>
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language6" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language6" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"
@@ -194,9 +188,8 @@ const Language = () => {
                 </label>
               </div>
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language7" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language7" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"
@@ -214,9 +207,8 @@ const Language = () => {
                 </label>
               </div>
               <div
-                className={`form-check change-lan-sec ${
-                  selectedLanguage === "language8" ? "language-sel" : ""
-                }`}
+                className={`form-check change-lan-sec ${selectedLanguage === "language8" ? "language-sel" : ""
+                  }`}
               >
                 <input
                   className="form-check-input custom-input"

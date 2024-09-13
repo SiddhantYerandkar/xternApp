@@ -19,7 +19,7 @@ import Loading from "../components/Loading";
 const SelectCoursesScreen = () => {
   const [selectedCourse, setSelectedCourse] = useState("course2");
   const [expandedAccordion, setExpandedAccordion] = useState("select-course1");
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const [isFixed, setIsFixed] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -91,13 +91,13 @@ const SelectCoursesScreen = () => {
       </div>
     ));
   };
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

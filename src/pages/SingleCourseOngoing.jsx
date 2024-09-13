@@ -67,7 +67,7 @@ const ProgressCircle = ({ percent, colorClass }) => {
 
 const SingleCourseOngoing = () => {
   const [isFixed, setIsFixed] = useState(false);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,13 +87,13 @@ const SingleCourseOngoing = () => {
     };
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   const handleBackClick = () => {
     navigate(-1); // This will navigate to the previous page in the history stack

@@ -70,15 +70,15 @@ const ProgressCircle = ({ percent, colorClass }) => {
 };
 
 const CourseOngoingScreen = () => {
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}

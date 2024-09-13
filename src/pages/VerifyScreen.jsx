@@ -5,7 +5,7 @@ import OtpInputGroup from "../components/OtpGroup";
 
 const VerifyScreen = () => {
   const [seconds, setSeconds] = useState(50);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -21,13 +21,13 @@ const VerifyScreen = () => {
     }
   }, [seconds]);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <>
       {/* <!-- Header start --> */}
