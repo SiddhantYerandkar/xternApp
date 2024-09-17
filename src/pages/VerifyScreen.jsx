@@ -271,7 +271,7 @@ const VerifyScreen = () => {
             </div>
           </div>
         </div>
-        <Toaster position="top-right" reverseOrder={false} />
+        <Toaster position="bottom-left" reverseOrder={false} />
       </section>
     </>
   );
