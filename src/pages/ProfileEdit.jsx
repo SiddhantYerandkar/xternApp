@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProfileImg from "../assets/images/courses/profile-img.png";
 import { Link, useNavigate } from "react-router-dom";
-import IntlTelInput from "react-intl-tel-input";
-import "react-intl-tel-input/dist/main.css";
+import PhoneInput from "react-phone-input-2"; // Import the new PhoneInput package
+import "react-phone-input-2/lib/style.css"; // Import the styles for PhoneInput
 import Loading from "../components/Loading";
 
 const ProfileEdit = () => {
@@ -10,7 +10,6 @@ const ProfileEdit = () => {
   const [name, setName] = useState("Jessica Smith");
   const [email, setEmail] = useState("jessicasmith@mail.com"); // Initialize email state
   const [mobile, setMobile] = useState("235 654 8899");
- // const [loading, setLoading] = useState(true);
 
   const handleChange = (event) => {
     setEmail(event.target.value); // Update email state when input changes
@@ -20,21 +19,14 @@ const ProfileEdit = () => {
     setName(event.target.value);
   };
 
-  const handleMobileChange = (event) => {
-    setMobile(event.target.value);
+  const handleMobileChange = (value) => {
+    setMobile(value); // Update mobile state when input changes (PhoneInput provides value directly)
   };
 
   const handleBackClick = () => {
     navigate(-1); // This will navigate to the previous page in the history stack
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
-  // }, []);
-
-  // if (loading) {
-  //   return <Loading />;
-  // }
   return (
     <>
       {/* <!-- Header start --> */}
@@ -80,7 +72,7 @@ const ProfileEdit = () => {
         <div className="navbar-boder"></div>
       </header>
       {/* <!-- Header end --> */}
-      {/* <!-- Profile edit  screen start --> */}
+      {/* <!-- Profile edit screen start --> */}
       <section id="profile-edit">
         <div className="container">
           <h1 className="d-none">Profile</h1>
@@ -223,13 +215,17 @@ const ProfileEdit = () => {
                       className="profile-custom-input"
                     />
                   </div>
+                  {/* Updated PhoneInput component */}
                   <div className="mobile-form margin-top">
-                    <IntlTelInput
-                      type="text"
-                      id="mobile_code"
-                      value={mobile} // Use email state as value
-                      onChange={handleMobileChange} // Handle changes with handleChange function
-                      className="profile-custom-input"
+                    <PhoneInput
+                      country={"us"} // Set default country
+                      value={mobile} // Pass mobile state value
+                      onChange={handleMobileChange} // Update mobile state
+                      inputProps={{
+                        name: "mobile",
+                        required: true,
+                        className: "profile-custom-input", // Apply the same custom class for styling
+                      }}
                     />
                   </div>
                   <div className="form-details-sign-in margin-top">
@@ -305,8 +301,9 @@ const ProfileEdit = () => {
           </div>
         </div>
       </section>
-      {/* <!-- Profile edit  screen end --> */}
+      {/* <!-- Profile edit screen end --> */}
     </>
   );
 };
+
 export default ProfileEdit;
