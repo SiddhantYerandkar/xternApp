@@ -4,9 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import EyeiconFill from "../assets/svg/eye-off-fill.svg";
 import Eyeicon from "../assets/svg/eye-fill.svg";
 import Loading from "../components/Loading";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 const SignIn = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -17,6 +23,31 @@ const SignIn = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const handleSignIn = async (event) => {
+    event.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          // You can now use `userData` to populate the user profile or store it in state
+          console.log('User profile data:', userData);
+          navigate('/preferredlanguage'); // Redirect on successful sign-in
+        } else {
+          console.error('No such user profile!');
+        }
+      }
+      //navigate('/preferredlanguage'); // Redirect on successful sign-in
+    } catch (err) {
+      setError(err.message); // Handle errors, such as incorrect credentials
+    }
+  };
+  
   // const [loading, setLoading] = useState(true);
 
   // useEffect(() => {
@@ -34,13 +65,14 @@ const SignIn = () => {
   // }, []);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500); // Simulate loading time
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
+  // }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
+
   return (
     <>
       {/* <!-- Preloader start --> */}
@@ -92,14 +124,14 @@ const SignIn = () => {
       {/* <!-- Sign in screen start --> */}
       <section
         id="sign-in-screen-content"
-        // className={loading ? "hidden-content" : ""}
+      // className={loading ? "hidden-content" : ""}
       >
         <div className="container">
           <div className="sign-in-login">
             <h1 className="login-txt">Login To Your Account</h1>
           </div>
           <div className="sign-in-login-form mt-24">
-            <form>
+            <form onSubmit={handleSignIn}>
               <div className="form-details-sign-in">
                 <span>
                   <svg
@@ -143,6 +175,8 @@ const SignIn = () => {
                   id="Email"
                   placeholder="Email"
                   className="sign-in-custom-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="form-details-sign-in mt-12">
@@ -195,6 +229,8 @@ const SignIn = () => {
                   id="password"
                   placeholder="Password"
                   className="sign-in-custom-input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <img
                   src={isPasswordVisible ? Eyeicon : EyeiconFill}
@@ -203,6 +239,10 @@ const SignIn = () => {
                   id="eye"
                   onClick={togglePasswordVisibility}
                 />
+              </div>
+              {error && <p className="error-message">{error}</p>}
+              <div className="sign-in-btn mt-32 ">
+                <button type="submit">Sign In</button>
               </div>
             </form>
           </div>
@@ -220,9 +260,6 @@ const SignIn = () => {
             <div className="forget-btn">
               <Link to="/forgetpassword">Forget password?</Link>
             </div>
-          </div>
-          <div className="sign-in-btn mt-32 ">
-            <Link to="/preferredlanguage">Sign In</Link>
           </div>
           <div className="or-section mt-32">
             <p>or continue with</p>
