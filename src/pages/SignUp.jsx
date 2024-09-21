@@ -44,6 +44,7 @@ const SignUp = () => {
       const user = userCredential.user;
 
       const userData = {
+        email: user.email,
         uid: user.uid, // Firebase user ID
         phone_number: `+${phone}`, // Phone number from state
         created_time: new Date().toISOString(), // Current timestamp
