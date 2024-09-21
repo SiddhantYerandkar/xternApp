@@ -4,11 +4,18 @@ import "react-phone-input-2/lib/style.css"; // Import the required CSS for Phone
 import { Link, useNavigate } from "react-router-dom";
 import Eyeicon from "../assets/svg/eye-fill.svg"; // Importing Eyeicon
 import EyeiconFill from "../assets/svg/eye-off-fill.svg";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 
 const SignUp = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState(""); // Added state for PhoneInput
+  const [error, setError] = useState(""); // State to handle errors
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -21,6 +28,43 @@ const SignUp = () => {
 
   const togglePasswordVisible = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    try {
+
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const userData = {
+        uid: user.uid, // Firebase user ID
+        phone_number: `+${phone}`, // Phone number from state
+        created_time: new Date().toISOString(), // Current timestamp
+        display_name: document.getElementById("name").value
+      };
+
+      await setDoc(doc(db, "users", user.uid), userData);
+
+      navigate("/signin"); // Redirect to sign-in page after successful signup
+    } catch (error) {
+      // Check for specific error codes
+      if (error.code === 'auth/email-already-in-use') {
+        setError("The email address is already in use by another account.");
+      } else if (error.code === 'auth/invalid-email') {
+        setError("The email address is not valid.");
+      } else if (error.code === 'auth/weak-password') {
+        setError("The password is too weak.");
+      } else {
+        setError("An unexpected error occurred: " + error.message);
+      }
+    }
   };
 
   return (
@@ -71,7 +115,7 @@ const SignUp = () => {
             <h1 className="login-txt">Create Your Account</h1>
           </div>
           <div className="sign-up-login-form mt-24">
-            <form>
+            <form onSubmit={handleSignUp}>
               <div className="form-details-sign-in">
                 <span>
                   <svg
@@ -158,6 +202,8 @@ const SignUp = () => {
                 <input
                   type="email"
                   id="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                   className="sign-in-custom-input"
                 />
@@ -223,6 +269,8 @@ const SignUp = () => {
                 <input
                   type={isPasswordVisible ? "text" : "password"}
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                   className="sign-in-custom-input"
                 />
@@ -281,6 +329,8 @@ const SignUp = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password1"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password"
                   className="sign-in-custom-input"
                 />
@@ -292,28 +342,29 @@ const SignUp = () => {
                   onClick={togglePasswordVisible}
                 />
               </div>
+              <div className="remember-section">
+                <div className="footer-checkbox-sec">
+                  <input
+                    className="footer-checkbox-input"
+                    id="footer-checkbox"
+                    type="checkbox"
+                  />
+                  <label htmlFor="footer-checkbox" className="footer-chec-txt">
+                    Remember Me
+                  </label>
+                </div>
+              </div>
+              <div className="sign-up-btn mt-32 ">
+                <button type="submit">Sign Up</button>
+              </div>
+              {error && <p className="error-message">{error}</p>}
+              <div className="or-section mt-32">
+                <p>or continue with</p>
+              </div>
+              <div className="sign-in-social-media">
+                {/* Social media icons go here */}
+              </div>
             </form>
-          </div>
-          <div className="remember-section">
-            <div className="footer-checkbox-sec">
-              <input
-                className="footer-checkbox-input"
-                id="footer-checkbox"
-                type="checkbox"
-              />
-              <label htmlFor="footer-checkbox" className="footer-chec-txt">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <div className="sign-up-btn mt-32 ">
-            <Link to="/signin">Sign Up</Link>
-          </div>
-          <div className="or-section mt-32">
-            <p>or continue with</p>
-          </div>
-          <div className="sign-in-social-media">
-            {/* Social media icons go here */}
           </div>
         </div>
       </section>

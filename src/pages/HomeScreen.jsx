@@ -32,6 +32,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Link } from "react-router-dom";
 //import Loading from "../components/Loading";
 import DarkLightmode from "../components/DarkLightMode";
+import { db } from "../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
 const HomeScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +41,8 @@ const HomeScreen = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isBookmarkedIcon, setIsBookmarkedIcon] = useState(false);
   const [isBookmarkIcon, setIsBookmarkIcon] = useState(false);
- // const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+  const [courses, setCourses] = useState([]);
 
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
@@ -82,7 +85,7 @@ const HomeScreen = () => {
     arrows: false,
   };
 
-    const CompanySettings = {
+  const CompanySettings = {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -123,13 +126,25 @@ const HomeScreen = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   setTimeout(() => setLoading(false), 500); // Simulate loading time
-  // }, []);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "codingChallenges"));
+       
+        const coursesList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCourses(coursesList);
+      } catch (error) {
+        console.error("Error fetching courses: ", error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
   return (
     <>
       {/* <!-- Header start --> */}
@@ -474,9 +489,8 @@ const HomeScreen = () => {
                   <div className="trending-bookmark">
                     <a
                       href="#"
-                      className={`item-bookmark ${
-                        isBookmarked ? "active" : ""
-                      }`}
+                      className={`item-bookmark ${isBookmarked ? "active" : ""
+                        }`}
                       onClick={toggleBookmark}
                       tabIndex="0"
                     >
@@ -514,9 +528,8 @@ const HomeScreen = () => {
                   <div className="trending-bookmark">
                     <a
                       href="#"
-                      className={`item-bookmark ${
-                        isBookmarked ? "active" : ""
-                      }`}
+                      className={`item-bookmark ${isBookmarked ? "active" : ""
+                        }`}
                       onClick={toggleBookmark}
                       tabIndex="0"
                     >
@@ -554,9 +567,8 @@ const HomeScreen = () => {
                   <div className="trending-bookmark">
                     <a
                       href="#"
-                      className={`item-bookmark ${
-                        isBookmarked ? "active" : ""
-                      }`}
+                      className={`item-bookmark ${isBookmarked ? "active" : ""
+                        }`}
                       onClick={toggleBookmark}
                       tabIndex="0"
                     >
@@ -676,9 +688,8 @@ const HomeScreen = () => {
                             <div className="result-bookmark">
                               <a
                                 href="#"
-                                className={`item-bookmark ${
-                                  isBookmarked ? "active" : ""
-                                }`}
+                                className={`item-bookmark ${isBookmarked ? "active" : ""
+                                  }`}
                                 onClick={toggleBookmark}
                                 tabIndex="0"
                               >
@@ -735,9 +746,8 @@ const HomeScreen = () => {
                             <div className="result-bookmark">
                               <a
                                 href="#"
-                                className={`item-bookmark ${
-                                  isBookmarkIcon ? "active" : ""
-                                }`}
+                                className={`item-bookmark ${isBookmarkIcon ? "active" : ""
+                                  }`}
                                 onClick={toggleBookmarkIcon}
                                 tabIndex="0"
                               >
@@ -794,9 +804,8 @@ const HomeScreen = () => {
                             <div className="result-bookmark">
                               <a
                                 href="#"
-                                className={`item-bookmark ${
-                                  isBookmarkedIcon ? "active" : ""
-                                }`}
+                                className={`item-bookmark ${isBookmarkedIcon ? "active" : ""
+                                  }`}
                                 onClick={toggleBookmarkedIcon}
                                 tabIndex="0"
                               >
@@ -908,9 +917,8 @@ const HomeScreen = () => {
                             <div className="result-bookmark">
                               <a
                                 href="#"
-                                className={`item-bookmark ${
-                                  isBookmarked ? "active" : ""
-                                }`}
+                                className={`item-bookmark ${isBookmarked ? "active" : ""
+                                  }`}
                                 onClick={toggleBookmarkIcon}
                                 tabIndex="0"
                               >
@@ -973,9 +981,8 @@ const HomeScreen = () => {
                             <div className="result-bookmark">
                               <a
                                 href="#"
-                                className={`item-bookmark ${
-                                  isBookmarked ? "active" : ""
-                                }`}
+                                className={`item-bookmark ${isBookmarked ? "active" : ""
+                                  }`}
                                 onClick={toggleBookmark}
                                 tabIndex="0"
                               >
@@ -1040,9 +1047,8 @@ const HomeScreen = () => {
                             <div className="result-bookmark">
                               <a
                                 href="#"
-                                className={`item-bookmark ${
-                                  isBookmarked ? "active" : ""
-                                }`}
+                                className={`item-bookmark ${isBookmarked ? "active" : ""
+                                  }`}
                                 onClick={toggleBookmark}
                                 tabIndex="0"
                               >
@@ -1108,9 +1114,8 @@ const HomeScreen = () => {
                             <div className="result-bookmark">
                               <a
                                 href="#"
-                                className={`item-bookmark ${
-                                  isBookmarkedIcon ? "active" : ""
-                                }`}
+                                className={`item-bookmark ${isBookmarkedIcon ? "active" : ""
+                                  }`}
                                 onClick={toggleBookmark}
                                 tabIndex="0"
                               >
@@ -1157,7 +1162,7 @@ const HomeScreen = () => {
           </div>
         </div>
 
-  <div className="home-mentor mt-32">
+        <div className="home-mentor mt-32">
           <div className="home-category-wrap container">
             <div className="homescreen-second-wrapper-top">
               <div className="categories-first">
@@ -1222,7 +1227,7 @@ const HomeScreen = () => {
             </Link>
           </div>
         </div>
-     
+
         <div className="home-category mt-32">
           <div className="home-category-wrap container">
             <div className="homescreen-second-wrapper-top">
@@ -1287,7 +1292,7 @@ const HomeScreen = () => {
             </Link>
           </div>
         </div>
-        
+
         <div className="home-trending-course mt-32">
           <div className="homescreen-second-wrapper-top container">
             <div className="categories-first">
@@ -1318,9 +1323,8 @@ const HomeScreen = () => {
                       <div className="trending-bookmark">
                         <a
                           href="#"
-                          className={`item-bookmark ${
-                            isBookmarked ? "active" : ""
-                          }`}
+                          className={`item-bookmark ${isBookmarked ? "active" : ""
+                            }`}
                           onClick={toggleBookmark}
                           tabIndex="0"
                         >
@@ -1363,9 +1367,8 @@ const HomeScreen = () => {
                       <div className="trending-bookmark">
                         <a
                           href="#"
-                          className={`item-bookmark ${
-                            isBookmarked ? "active" : ""
-                          }`}
+                          className={`item-bookmark ${isBookmarked ? "active" : ""
+                            }`}
                           onClick={toggleBookmark}
                           tabIndex="0"
                         >
@@ -1402,8 +1405,8 @@ const HomeScreen = () => {
           </div>
         </div>
 
-      
-        
+
+
       </section>
       {/* <!-- Homescreen content end --> */}
       {/* <!-- Tabbar start --> */}

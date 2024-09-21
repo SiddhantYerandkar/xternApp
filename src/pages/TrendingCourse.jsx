@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilterIcon from "../assets/images/mentor/filter-icon.svg";
 import BookmarkSvg from "../assets/svg/black-bookmark.svg";
 import FillStar from "../assets/images/single-courses/orange-fill-star.svg";
@@ -8,10 +8,13 @@ import CourseImg3 from "../assets/images/trending-course/course3.png";
 import CourseImg4 from "../assets/images/trending-course/course4.png";
 import CourseImg5 from "../assets/images/trending-course/course5.png";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
 const TrendingCourse = () => {
   const [bookmarks, setBookmarks] = useState([true, false, true, true, false]);
-
+  const [courses, setCourses] = useState([]);
+  
   const toggleBookmark = (index) => {
     setBookmarks(
       bookmarks.map((active, i) => (i === index ? !active : active))
@@ -56,6 +59,25 @@ const TrendingCourse = () => {
       star: "4.6",
     },
   ];
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "codingChallenges"));
+        const coursesList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCourses(coursesList);
+      } catch (error) {
+        console.error("Error fetching courses: ", error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+
   return (
     <>
       {/* <!-- Header start --> */}
@@ -110,20 +132,19 @@ const TrendingCourse = () => {
       {/* <!-- Trending courses start --> */}
       <section id="trending-course">
         <div className="container">
-          <h1 className="d-none">Hideen</h1>
+          <h1 className="d-none">Hidden</h1>
           <h2 className="d-none">Trending</h2>
           <div className="trending-course-wrap mt-32">
-            {trendingCourse.map((course, index) => (
+            {courses.map((course, index) => (
               <div
-                className={`trending-course-details single-course ${
-                  index === 0 ? "mt-12" : "mt-16"
-                }`}
-                key={index}
+                className={`trending-course-details single-course ${index === 0 ? "mt-12" : "mt-16"
+                  }`}
+                key={course.id}
               >
                 <div className="trending-course-img">
                   <Link to="/single-course-description">
                     <img
-                      src={course.imgSrc}
+                      src={CourseImg1}  // Placeholder image
                       alt="course-img"
                       className="w-100"
                     />
@@ -131,34 +152,34 @@ const TrendingCourse = () => {
                   <div className="trending-bookmark">
                     <a
                       href="#"
-                      className={`item-bookmark ${
-                        bookmarks[index] ? "active" : ""
-                      }`}
+                      className={`item-bookmark ${bookmarks[index] ? "active" : ""
+                        }`}
                       onClick={() => toggleBookmark(index)}
                     >
                       <img src={BookmarkSvg} alt="bookmark-icon" />
                     </a>
                   </div>
                   <div className="trending-name">
-                    <p>{course.category}</p>
+                    <p>{course.category}</p>  {/* Display skill from Firestore */}
                   </div>
                 </div>
                 <div className="trending-course-bottom mt-12">
                   <div>
-                    <p className="trending-txt1">{course.title}</p>
+                    <p className="trending-txt1">{course.title}</p>  {/* Display title from Firestore */}
+                    <p className="trending-txt2">{course.detail}</p>  {/* Display detail from Firestore */}
                   </div>
                   <div className="trending-course-price">
                     <div>
-                      <span className="trending-txt2">{course.price}</span>
+                      <span className="trending-txt2">{course.price}</span>  {/* Display points as price */}
                       <span className="trending-txt3">
-                        {course.hiddenprice}
+                        {course.hiddenprice}  {/* Placeholder for hidden price */}
                       </span>
                     </div>
                     <div>
                       <span className="trending-txt4">
                         <img src={FillStar} alt="star-img" />
                       </span>
-                      <span className="trending-txt5">5.0</span>
+                      <span className="trending-txt5">5.0</span> {/* Default rating */}
                     </div>
                   </div>
                 </div>

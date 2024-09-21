@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, RecaptchaVerifier } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCpzZHQ5R-fjc3Y8eH2rakvvRNRyYRWu6c",
@@ -42,4 +43,7 @@ const setUpRecaptcha = () => {
   }
 };
 
-export { auth, setUpRecaptcha };
+// Initialize Firestore
+const db = getFirestore(app)
+
+export { auth, setUpRecaptcha, db };
